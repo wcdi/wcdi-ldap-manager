@@ -1,32 +1,36 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
 
 <dom-module id="wcdi-ldap-manager-app">
-  <template>
-    <style>
-      :host {
-        display: block;
-      }
-    </style>
-    <h2>Hello [[prop1]]!</h2>
-  </template>
+    <template>
+        <style>
+            :host {
+                display: block;
+            }
+        </style>
 
-  <script>
-    /**
-     * @customElement
-     * @polymer
-     */
-    class WcdiLdapManagerApp extends Polymer.Element {
-      static get is() { return 'wcdi-ldap-manager-app'; }
-      static get properties() {
-        return {
-          prop1: {
-            type: String,
-            value: 'wcdi-ldap-manager-app'
-          }
-        };
-      }
-    }
+        <app-route
+                route="{{route}}"
+                pattern="/:page"
+                data="{{routeData}}"
+                tail="{{subroute}}"></app-route>
 
-    window.customElements.define(WcdiLdapManagerApp.is, WcdiLdapManagerApp);
-  </script>
+    </template>
+
+    <script>
+        /**
+         * @customElement
+         * @polymer
+         */
+        class WcdiLdapManagerApp extends Polymer.Element {
+            static get is() {
+                return 'wcdi-ldap-manager-app';
+            }
+
+            static get properties() {
+                return {};
+            }
+        }
+
+        window.customElements.define(WcdiLdapManagerApp.is, WcdiLdapManagerApp);
+    </script>
 </dom-module>
