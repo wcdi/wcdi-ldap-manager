@@ -1,0 +1,6 @@
+{
+  "name": "wcdi-ldap-manager",
+  "short_name": "wcdi-ldap-manager",
+  "start_url": "/",
+  "display": "standalone"
+}
