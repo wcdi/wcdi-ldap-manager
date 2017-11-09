@@ -86,7 +86,7 @@
                 </app-toolbar>
             </app-header>
             <app-drawer-layout id="drawer-layout">
-                <app-drawer id="drawer" slot="drawer" swipe-open>
+                <app-drawer id="drawer" slot="drawer" swipe-open opened={{drawerState}}>
                     <div class="drawer-content">
                         <paper-icon-item>
                             <iron-icon icon="dashboard" slot="item-icon"></iron-icon>
@@ -119,7 +119,6 @@
                     drawerState: {
                         type    : Boolean,
                         value   : false,
-                        observer: '_changeDrawerState',
                     },
                 };
             }
@@ -128,15 +127,6 @@
                 this.drawerState = !this.drawerState;
             }
 
-            _changeDrawerState(state) {
-                if (state) {
-                    this.root.querySelector('#drawer')
-                        .open();
-                } else {
-                    this.root.querySelector('#drawer')
-                        .close();
-                }
-            }
         }
 
         window.customElements.define(WcdiLdapManagerApp.is, WcdiLdapManagerApp);
