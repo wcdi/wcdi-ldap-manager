@@ -28,7 +28,7 @@
                   "description" : "トークンが渡されるスキーマ",
                   "properties" : {
                     "expireDate" : {
-                      "description" : "トークンが失効するじ日時のUNIX TIME",
+                      "description" : "トークンが失効する日時のUNIX TIME",
                       "type" : "number",
                       "example" : 123456789
                     },
