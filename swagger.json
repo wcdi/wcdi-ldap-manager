@@ -1,0 +1,148 @@
+{
+  "openapi" : "3.0.0",
+  "servers" : [ {
+    "description" : "SwaggerHub API Auto Mocking",
+    "url" : "https://virtserver.swaggerhub.com/acque2two/ldap-wcdi/1.0.0"
+  }, {
+    "description" : "SwaggerHub API Auto Mocking",
+    "url" : "https://virtserver.swaggerhub.com/acque2two/ldap-wcdi/0.0.1"
+  } ],
+  "info" : {
+    "version" : "1.0.0",
+    "title" : "WCDI LDAP Management tool API",
+    "description" : "This is my LDAP Management tool Server side API for WCDI"
+  },
+  "security" : [ {
+    "password" : [ "read", "write" ]
+  } ],
+  "paths" : {
+    "/auth" : {
+      "get" : {
+        "summary" : "認証に使うOTPを生成します",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "description" : "トークンが渡されるスキーマ",
+                  "properties" : {
+                    "expireDate" : {
+                      "description" : "トークンが失効するじ日時のUNIX TIME",
+                      "type" : "number",
+                      "example" : 123456789
+                    },
+                    "oneTimeToken" : {
+                      "description" : "指定のトークン",
+                      "type" : "string",
+                      "example" : "asdfasdfasdfasdfasdfasdfasdfasdf"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post" : {
+        "summary" : "認証を行います",
+        "parameters" : [ {
+          "name" : "uid",
+          "description" : "ユーザIDを指定します",
+          "in" : "query",
+          "required" : true,
+          "schema" : {
+            "type" : "string",
+            "description" : "ユーザID",
+            "example" : "user1"
+          }
+        }, {
+          "name" : "password",
+          "description" : "パスワードを指定します",
+          "in" : "query",
+          "required" : true,
+          "schema" : {
+            "type" : "string",
+            "description" : "パスワード",
+            "example" : "password"
+          }
+        }, {
+          "name" : "token",
+          "in" : "query",
+          "required" : true,
+          "schema" : {
+            "type" : "string",
+            "description" : "GETリクエストで取得したoneTimeToken",
+            "example" : "asdfasdfasdfasdfasdfasdf"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "properties" : {
+                    "status" : {
+                      "description" : "認証状況",
+                      "type" : "string",
+                      "example" : "OK"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403" : {
+            "description" : "Authentication Error(Invalid schemas)"
+          },
+          "404" : {
+            "description" : "User not found or Password Mismatch"
+          },
+          "500" : {
+            "description" : "Server error"
+          }
+        }
+      }
+    },
+    "/user/list" : {
+      "get" : {
+        "summary" : "ユーザ一覧を表示します",
+        "responses" : {
+          "200" : {
+            "description" : "OK"
+          }
+        }
+      }
+    },
+    "/ping" : {
+      "get" : {
+        "summary" : "Server heartbeat operation",
+        "description" : "This operation shows how to override the global security defined above, as we want to open it up for all users",
+        "security" : [ ],
+        "responses" : {
+          "200" : {
+            "description" : "OK"
+          }
+        }
+      }
+    }
+  },
+  "components" : {
+    "schemas" : { },
+    "securitySchemes" : {
+      "password" : {
+        "type" : "oauth2",
+        "flows" : {
+          "password" : {
+            "tokenUrl" : "http://example.com/oauth/token",
+            "scopes" : {
+              "write" : "allows modifying resources",
+              "read" : "allows reading resources"
+            }
+          }
+        }
+      }
+    }
+  }
+}
