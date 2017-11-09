@@ -1,4 +1,15 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="/bower_components/app-route/app-route.html">
+<link rel="import" href="/bower_components/app-route/app-location.html">
+<link rel="import" href="/bower_components/app-layout/app-drawer-layout/app-drawer-layout.html">
+<link rel="import" href="/bower_components/app-layout/app-drawer/app-drawer.html">
+<link rel="import" href="/bower_components/app-layout/app-scroll-effects/app-scroll-effects.html">
+<link rel="import" href="/bower_components/app-layout/app-header/app-header.html">
+<link rel="import" href="/bower_components/app-layout/app-header-layout/app-header-layout.html">
+<link rel="import" href="/bower_components/app-layout/app-toolbar/app-toolbar.html">
+<link rel="import" href="/bower_components/app-route/app-location.html">
+<link rel="import" href="/bower_components/app-route/app-route.html">
+<link rel="import" href="/bower_components/iron-icons/iron-icons.html">
 
 <dom-module id="wcdi-ldap-manager-app">
     <template>
@@ -6,13 +17,87 @@
             :host {
                 display: block;
             }
+
+            app-header {
+                background-color: #c62828;
+                color: rgb(255, 255, 255);
+            }
+
+            app-header paper-icon-button {
+                --paper-icon-button-ink-color: rgb(255, 255, 255);
+            }
+
+            app-drawer-layout {
+                --app-drawer-layout-content-transition: margin 0.2s;
+            }
+
+            app-drawer {
+                --app-drawer-content-container: {
+                    background-color: rgb(238, 238, 238);
+                }
+            }
+
+            app-header-layout {
+                z-index: 900;
+            }
+            .drawer-content {
+                margin-top: 80px;
+                height: calc(100% - 80px);
+                overflow: auto;
+                display: flex;
+                flex-direction: column;
+            }
+
+            .drawer-content hr {
+                width: 80%;
+                border: none;
+                height: 1px;
+                margin: 12px auto;
+                background-color: rgb(204, 204, 204);
+            }
+
+            paper-icon-item {
+                margin: 12px;
+            }
+
+            app-drawer a {
+                color: rgb(0, 0, 0);
+                text-decoration: none;
+            }
+
         </style>
 
+        <app-location route="{{route}}"></app-location>
         <app-route
                 route="{{route}}"
                 pattern="/:page"
                 data="{{routeData}}"
-                tail="{{subroute}}"></app-route>
+                tail="{{subroute}}"
+        ></app-route>
+        <app-header-layout>
+            <app-header fixed slot="header" style="width: 100vw">
+                <app-toolbar>
+                    <paper-icon-button on-click="_toggleDrawer" id="toggle" icon="menu"></paper-icon-button>
+                    <div main-title>WCDI LDAP Manager</div>
+                    <div>Logout</div>
+                </app-toolbar>
+            </app-header>
+            <app-drawer-layout id="drawerLayout">
+                <app-drawer id="drawer" slot="drawer" swipe-open>
+                    <div class="drawer-content">
+                        <paper-icon-item>
+                            <iron-icon icon="dashboard" slot="item-icon"></iron-icon>
+                            <a href="/user/dashboard">ダッシュボード</a>
+                        </paper-icon-item>
+
+                        <paper-icon-item>
+                            <iron-icon icon="report-problem" slot="item-icon"></iron-icon>
+                            <a href="/bugreport">バグ報告</a>
+                        </paper-icon-item>
+                    </div>
+                </app-drawer>
+            </app-drawer-layout>
+        </app-header-layout>
 
     </template>
 
