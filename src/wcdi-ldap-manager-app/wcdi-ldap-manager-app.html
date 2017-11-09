@@ -42,6 +42,7 @@
             app-header-layout {
                 z-index: 900;
             }
+
             .drawer-content {
                 margin-top: 80px;
                 height: calc(100% - 80px);
@@ -84,7 +85,7 @@
                     <div>Logout</div>
                 </app-toolbar>
             </app-header>
-            <app-drawer-layout id="drawerLayout">
+            <app-drawer-layout id="drawer-layout">
                 <app-drawer id="drawer" slot="drawer" swipe-open>
                     <div class="drawer-content">
                         <paper-icon-item>
@@ -114,7 +115,27 @@
             }
 
             static get properties() {
-                return {};
+                return {
+                    drawerState: {
+                        type    : Boolean,
+                        value   : false,
+                        observer: '_changeDrawerState',
+                    },
+                };
+            }
+
+            _toggleDrawer() {
+                this.drawerState = !this.drawerState;
+            }
+
+            _changeDrawerState(state) {
+                if (state) {
+                    this.root.querySelector('#drawer')
+                        .open();
+                } else {
+                    this.root.querySelector('#drawer')
+                        .close();
+                }
             }
         }
 
