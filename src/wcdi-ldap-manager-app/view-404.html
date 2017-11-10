@@ -1,0 +1,97 @@
+<link rel="import" href="/bower_components/polymer/polymer-element.html">
+
+<dom-module id="view-404">
+    <template>
+        <style>
+            :host {
+                display: flex;
+                justify-content: center;
+                align-content: center;
+                align-items: center;
+                flex-direction: row;
+                width: 100%;
+                height: 100%;
+                color: #333;
+            }
+
+            :host #left {
+                display: flex;
+                justify-content: center;
+                align-content: center;
+                align-items: center;
+                flex-direction: column;
+                width: auto;
+                height: 100vh;
+                font-size: 6vh;
+            }
+
+            :host #left .icon {
+                width: 30vh;
+                height: 30vh;
+            }
+
+            :host #right {
+                display: flex;
+                justify-content: center;
+                align-content: center;
+                align-items: center;
+                width: 50vw;
+                height: 100vh;
+                font-size: 4vh;
+                flex-direction: column;
+                text-align: center;
+                margin: 0;
+            }
+
+            :host #padding {
+                width: 32px;
+                height: 32px;
+            }
+
+
+        </style>
+        <div id="left">
+            <paper-icon-button
+                    noink
+                    class="icon"
+                    icon="error"
+                    on-click="_toggleDrawer"
+                    aria-label="Categories"
+                    color="white"></paper-icon-button>
+
+            <h1 style="margin: 0px 0px 24px 0px">404</h1>
+        </div>
+        <div id="padding">
+
+        </div>
+        <div id="right">
+            <h2 style="margin: 24px 0px 0px 0px">アクセス先が見つかりません。</h2>
+        </div>
+    </template>
+
+    <script>
+        /**
+         * @customElement
+         * @polymer
+         */
+        class View404 extends Polymer.Element {
+            static get is() {
+              return "view-404";
+            }
+
+            static get properties() {
+                return {
+                    logo: {
+                        type: String,
+                    },
+                };
+            }
+
+            ready() {
+                super.ready();
+            }
+        }
+
+      window.customElements.define(View404.is, View404);
+    </script>
+</dom-module>
