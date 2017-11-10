@@ -222,6 +222,20 @@
     }
   },
   "components" : {
+    "securitySchemes" : {
+      "password" : {
+        "type" : "oauth2",
+        "flows" : {
+          "password" : {
+            "tokenUrl" : "http://example.com/oauth/token",
+            "scopes" : {
+              "write" : "allows modifying resources",
+              "read" : "allows reading resources"
+            }
+          }
+        }
+      }
+    },
     "schemas" : {
       "Error" : {
         "type" : "object",
@@ -243,18 +257,48 @@
             "example" : "0x80000001"
           }
         }
-      }
-    },
-    "securitySchemes" : {
-      "password" : {
-        "type" : "oauth2",
-        "flows" : {
-          "password" : {
-            "tokenUrl" : "http://example.com/oauth/token",
-            "scopes" : {
-              "write" : "allows modifying resources",
-              "read" : "allows reading resources"
-            }
+      },
+      "User" : {
+        "type" : "objct",
+        "description" : "ユーザを示すスキーマです",
+        "properties" : {
+          "id" : {
+            "description" : "内部的にアクセスする時に使うID",
+            "type" : "string",
+            "example" : 1000
+          },
+          "cn" : {
+            "description" : "Common Name, サークルでのニックネーム",
+            "type" : "string",
+            "example" : "acque.2two"
+          },
+          "fn" : {
+            "description" : "First Name, 本名の「名」",
+            "type" : "string",
+            "example" : "Kazuho"
+          },
+          "ln" : {
+            "description" : "Last Name, 本名の「姓」",
+            "type" : "string",
+            "example" : "Niidome"
+          },
+          "dep" : {
+            "description" : "Department, 学科",
+            "type" : "string",
+            "example" : "ITスペシャリスト"
+          },
+          "sdep" : {
+            "description" : "Short Department, 略字2字",
+            "type" : "string",
+            "example" : "IS"
+          },
+          "grade" : {
+            "description" : "Grader, 何期生か",
+            "type" : "number",
+            "example" : 9
+          },
+          "joinDate" : {
+            "description" : "サークルに入った日時"
           }
         }
       }
