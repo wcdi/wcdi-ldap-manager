@@ -49,7 +49,17 @@
             }
           },
           "403" : {
-            "description" : "認証の失敗が一定以上続いたか、OTTの取得回数が時間内の上限を超過超過しました。　",
+            "description" : "認証の失敗が一定以上続いたか、OTTの取得回数が時間内の上限を超過超過しました。",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "認証のためのトークンを発行するのに失敗しました",
             "content" : {
               "application/json" : {
                 "schema" : {
@@ -121,6 +131,70 @@
           },
           "500" : {
             "description" : "Server error"
+          }
+        }
+      },
+      "delete" : {
+        "summary" : "ログアウトし、セッションを無効化します。",
+        "parameters" : [ {
+          "name" : "session",
+          "description" : "セッションIDを指定します。",
+          "in" : "query",
+          "required" : true,
+          "schema" : {
+            "type" : "string",
+            "description" : "ユーザID",
+            "example" : "asdlfaldfdaaaa"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "properties" : {
+                    "status" : {
+                      "description" : "処理結果/常にOKを返す",
+                      "type" : "string",
+                      "example" : "OK"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403" : {
+            "description" : "そのセッションを扱う権限がない",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "properties" : {
+                    "status" : {
+                      "description" : "処理結果/常にFailを返す",
+                      "type" : "string",
+                      "example" : "Fail"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "そのセッションがない",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "properties" : {
+                    "status" : {
+                      "description" : "処理結果/常にFailを返す",
+                      "type" : "string",
+                      "example" : "Fail"
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }
