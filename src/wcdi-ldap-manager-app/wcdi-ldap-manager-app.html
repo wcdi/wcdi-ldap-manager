@@ -22,7 +22,7 @@
             }
 
             app-header-layout {
-                z-index: 900;
+                z-index: 1;
             }
 
             app-header {
@@ -34,26 +34,42 @@
                 };
             }
 
+            app-drawer {
+                --app-drawer-content-container: {
+                    background-color: transparent;
+                }
+            }
+
+            app-drawer-layout[narrow] app-drawer {
+                --app-drawer-content-container: {
+                    box-shadow: 1px 0 2px 1px rgba(0,0,0,0.18);
+                    background-color: white;
+                }
+                --app-drawer-scrim-background: rgba(0, 0, 0, 0.5);
+            }
+
             .drawer-content {
+                background-color: transparent;
                 margin-top: 80px;
                 height: calc(100vh - 80px);
                 overflow: auto;
+                padding: 0 12px;
             }
 
             a {
                 color: rgb(0, 0, 0);
                 font-size: 14px;
                 text-decoration: none;
+                border-radius: 2px;
+            }
+
+            a:hover {
+                background-color: rgba(0, 0, 0, 0.1);
             }
 
             paper-icon-item {
                 transition: all .3s ease-out;
                 cursor: pointer;
-                border-radius: 2px;
-            }
-
-            paper-icon-item:hover {
-                background-color: rgba(0, 0, 0, 0.1);
             }
 
             iron-pages {
@@ -61,8 +77,8 @@
                 left: 0;
             }
 
-            iron-pages[drawer-viewed] {
-                left: 256px
+            iron-pages[fit-width] {
+                left: 256px;
             }
 
         </style>
@@ -82,13 +98,20 @@
                     <div>Logout</div>
                 </app-toolbar>
             </app-header>
-            <app-drawer-layout id="drawer-layout">
-                <app-drawer id="drawer" slot="drawer" swipe-open opened={{drawerState}}>
+            <app-drawer-layout id="drawer-layout" narrow={{narrow}}>
+                <app-drawer id="drawer" slot="drawer" swipe-open opened={{drawerIsOpen}}>
                     <div class="drawer-content">
                         <a href="/dashboard">
                             <paper-icon-item>
                                 <iron-icon icon="dashboard" slot="item-icon"></iron-icon>
                                 <span>ダッシュボード</span>
+                                <paper-ripple></paper-ripple>
+                            </paper-icon-item>
+                        </a>
+                        <a href="/iam">
+                            <paper-icon-item>
+                                <iron-icon icon="supervisor-account" slot="item-icon"></iron-icon>
+                                <span>IAM</span>
                                 <paper-ripple></paper-ripple>
                             </paper-icon-item>
                         </a>
@@ -105,16 +128,17 @@
         </app-header-layout>
 
         <iron-pages
+            id="pages"
             role="main"
             selected="[[routeData.page]]"
             attr-for-selected="name"
             selected-attribute="visible"
             fallback-selection="404"
-            drawer-viewed$="[[drawerState]]"
+            fit-width$="[[_isFitWidth(drawerIsOpen)]]"
         >
             <div
                 name="dashboard"
-                style="background: black; height: 100%;"
+                style="background: black; height: 100%; color: white;"
             >
                 test element
             </div>
@@ -131,7 +155,7 @@
                 name="user"
                 offline="[[offline]]"
                 route={{subroute}}
-                drawer-state="{{drawerState}}"
+                drawer-state="{{drawerIsOpen}}"
             ></view-user>
             <view-404 name="404" logo="{{logoUrl}}"></view-404>
         </iron-pages>
@@ -144,21 +168,28 @@
          */
         class WcdiLdapManagerApp extends Polymer.Element {
             static get is() {
-                return 'wcdi-ldap-manager-app';
+                return "wcdi-ldap-manager-app";
             }
 
             static get properties() {
                 return {
-                    drawerState: {
+                    drawerIsOpen: {
                         type    : Boolean,
-                        value   : false,
+                        value   : false
+                    },
+                    narrow: {
+                        type    : Boolean,
+                        value   : false
                     }
                 };
             }
 
+            _isFitWidth() {
+                return !this.narrow && this.drawerIsOpen
+            }
+
             _toggleDrawer() {
-                this.drawerState = !this.drawerState;
-                console.log(this.__proto__)
+                this.drawerIsOpen = !this.drawerIsOpen;
             }
         }
 
