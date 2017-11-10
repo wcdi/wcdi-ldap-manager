@@ -95,10 +95,10 @@
         }, {
           "name" : "token",
           "in" : "query",
+          "description" : "GETリクエストで取得したoneTimeToken",
           "required" : true,
           "schema" : {
             "type" : "string",
-            "description" : "GETリクエストで取得したoneTimeToken",
             "example" : "asdfasdfasdfasdfasdfasdf"
           }
         } ],
@@ -113,6 +113,9 @@
                       "description" : "認証状況",
                       "type" : "string",
                       "example" : "OK"
+                    },
+                    "token" : {
+                      "description" : "発行したJWTトークン"
                     }
                   }
                 }
