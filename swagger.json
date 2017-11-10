@@ -53,16 +53,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "properties" : {
-                    "status" : {
-                      "description" : "常に`Fail`が返されます",
-                      "example" : "Fail"
-                    },
-                    "reason" : {
-                      "description" : "失敗理由が返されます",
-                      "example" : "Fail count OVER"
-                    }
-                  }
+                  "$ref" : "#/components/schemas/Error"
                 }
               }
             }
@@ -158,7 +149,29 @@
     }
   },
   "components" : {
-    "schemas" : { },
+    "schemas" : {
+      "Error" : {
+        "type" : "object",
+        "description" : "エラーを示すスキーマです",
+        "properties" : {
+          "status" : {
+            "description" : "エラーの時には常にFailを返します",
+            "type" : "string",
+            "example" : "Fail"
+          },
+          "reason" : {
+            "description" : "エラーの理由を返します",
+            "type" : "string",
+            "example" : "You are not logged in."
+          },
+          "code" : {
+            "description" : "エラーコードを示します",
+            "type" : "number",
+            "example" : "0x80000001"
+          }
+        }
+      }
+    },
     "securitySchemes" : {
       "password" : {
         "type" : "oauth2",
