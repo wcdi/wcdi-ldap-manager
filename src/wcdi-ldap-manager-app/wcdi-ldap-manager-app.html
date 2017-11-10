@@ -1,4 +1,5 @@
 <link rel="import" href="/src/wcdi-ldap-manager-app/view-404.html">
+<link rel="import" href="/src/wcdi-ldap-manager-app/view-iam.html">
 <link rel="import" href="/bower_components/polymer/polymer-element.html">
 <link rel="import" href="/bower_components/paper-item/paper-icon-item.html">
 <link rel="import" href="/bower_components/paper-icon-button/paper-icon-button.html">
@@ -154,13 +155,13 @@
             ></view-login>
 
             <!-- list view of items in a category -->
-            <view-user
+            <view-iam
                 name="user"
-                offline="[[offline]]"
-                route={{subroute}}
-                drawer-state="{{drawerIsOpen}}"
             ></view-user>
-            <view-404 name="404" logo="{{logoUrl}}"></view-404>
+            <view-404
+                name="404"
+                logo="{{logoUrl}}
+            "></view-404>
         </iron-pages>
     </template>
 

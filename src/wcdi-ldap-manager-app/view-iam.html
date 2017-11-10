@@ -59,41 +59,39 @@
                     aria-label="Categories"
                     color="white"></paper-icon-button>
 
-            <h1 style="margin: 0px 0px 24px 0px">404</h1>
+            <h1 style="margin: 0px 0px 24px 0px">iam</h1>
         </div>
         <div id="padding">
 
         </div>
         <div id="right">
-            <h2 style="margin: 24px 0px 0px 0px">アクセス先が見つかりません。</h2>
-
+            <h2 style="margin: 24px 0px 0px 0px">iam</h2>
         </div>
     </template>
 
     <script>
-      /**
-       * @customElement
-       * @polymer
-       */
-      class View404 extends Polymer.Element {
-        static get is() {
-          return 'view-iam';
+        /**
+         * @customElement
+         * @polymer
+         */
+        class ViewIAM extends Polymer.Element {
+            static get is() {
+              return "view-iam";
+            }
+
+            static get properties() {
+                return {
+                    logo: {
+                        type: String,
+                    }
+                };
+            }
+
+            ready() {
+                super.ready();
+            }
         }
 
-        static get properties() {
-          return {
-            logo: {
-              type: String,
-            },
-          };
-        }
-
-
-        ready() {
-          super.ready();
-        }
-      }
-
-      window.customElements.define(View404.is, View404);
+        window.customElements.define(ViewIAM.is, ViewIAM);
     </script>
 </dom-module>
