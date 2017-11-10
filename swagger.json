@@ -18,7 +18,7 @@
   "paths" : {
     "/auth" : {
       "get" : {
-        "summary" : "認証に使うOTPを生成します",
+        "summary" : "認証に使うOTTを生成します",
         "responses" : {
           "200" : {
             "description" : "OK",
@@ -27,15 +27,40 @@
                 "schema" : {
                   "description" : "トークンが渡されるスキーマ",
                   "properties" : {
+                    "status" : {
+                      "description" : "常にOKが返されます",
+                      "type" : "string",
+                      "example" : "OK"
+                    },
                     "expireDate" : {
                       "description" : "トークンが失効する日時のUNIX TIME",
-                      "type" : "number",
-                      "example" : 123456789
+                      "type" : "string",
+                      "format" : "date-time",
+                      "example" : "Fri Nov 10 2017 13:36:34 GMT+0900"
                     },
                     "oneTimeToken" : {
                       "description" : "指定のトークン",
                       "type" : "string",
                       "example" : "asdfasdfasdfasdfasdfasdfasdfasdf"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403" : {
+            "description" : "認証の失敗が一定以上続いたか、OTTの取得回数が時間内の上限を超過超過しました。　",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "properties" : {
+                    "status" : {
+                      "description" : "常に`Fail`が返されます",
+                      "example" : "Fail"
+                    },
+                    "reason" : {
+                      "description" : "失敗理由が返されます",
+                      "example" : "Fail count OVER"
                     }
                   }
                 }
@@ -63,6 +88,7 @@
           "required" : true,
           "schema" : {
             "type" : "string",
+            "format" : "password",
             "description" : "パスワード",
             "example" : "password"
           }
