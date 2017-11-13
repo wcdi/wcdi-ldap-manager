@@ -1,72 +1,143 @@
+<link rel="import" href="/bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="/bower_components/iron-dropdown/iron-dropdown.html">
+<link rel="import" href="/bower_components/iron-icons/iron-icons.html">
+<link rel="import" href="/bower_components/iron-image/iron-image.html">
+<link rel="import" href="/bower_components/iron-list/iron-list.html">
+<link rel="import" href="/bower_components/neon-animation/web-animations.html">
+<link rel="import" href="/bower_components/neon-animation/animations/scale-up-animation.html">
+<link rel="import" href="/bower_components/neon-animation/animations/fade-out-animation.html">
+<link rel="import" href="/bower_components/paper-checkbox/paper-checkbox.html">
+<link rel="import" href="/bower_components/paper-dialog/paper-dialog.html">
+<link rel="import" href="/bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="/bower_components/paper-item/paper-icon-item.html">
+<link rel="import" href="/bower_components/paper-item/paper-item.html">
+<link rel="import" href="/bower_components/paper-item/paper-item-body.html">
+<link rel="import" href="/bower_components/paper-listbox/paper-listbox.html">
+<link rel="import" href="/bower_components/paper-menu-button/paper-menu-button.html">
+<link rel="import" href="/bower_components/paper-ripple/paper-ripple.html">
 <link rel="import" href="/bower_components/polymer/polymer-element.html">
 
 <dom-module id="view-iam">
     <template>
         <style>
             :host {
-                display: flex;
-                justify-content: center;
-                align-content: center;
-                align-items: center;
-                flex-direction: row;
-                width: 100%;
-                height: 100%;
-                color: #333;
+                display: block;
+                @apply --paper-font-common-base;
             }
 
-            :host #left {
-                display: flex;
-                justify-content: center;
-                align-content: center;
-                align-items: center;
-                flex-direction: column;
-                width: auto;
-                height: 100vh;
-                font-size: 6vh;
+            #list {
+                --iron-list-items-container: {
+                    background-color: white;
+                    box-shadow      : rgba(0, 0, 0, 0.14) 0px 2px 2px 0px,
+                                      rgba(0, 0, 0, 0.12) 0px 1px 5px 0px,
+                                      rgba(0, 0, 0, 0.2) 0px 3px 1px -2px;
+                };
+                margin    : 0 auto;
+                margin-top: 24px;
+                max-width : 960px;
+                padding   : 24px;
+                width     : calc(100% - 2 * 24px);
             }
 
-            :host #left .icon {
-                width: 30vh;
-                height: 30vh;
+            .user-item {
+                background-color: #fafbfd;
+                color     : var(--primary-text-color);
+                cursor    : pointer;
+                display   : flex;
+                transition: all .3s ease-out;
+                --paper-item-focused-before: {
+                     background: initial;
+                };
             }
 
-            :host #right {
-                display: flex;
-                justify-content: center;
-                align-content: center;
-                align-items: center;
-                width: 50vw;
-                height: 100vh;
-                font-size: 4vh;
-                flex-direction: column;
-                text-align: center;
-                margin: 0;
+            paper-icon-item:hover,
+            paper-item:hover {
+                background-color: rgba(241, 242, 242, 1);
             }
 
-            :host #padding {
-                width: 32px;
-                height: 32px;
+            iron-image {
+                display: inline-block;
+                box-sizing: border-box;
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                background: var(--paper-amber-500);
             }
 
-
+            .menu-item {
+                --paper-item-selected: {
+                    font-weight: initial;
+                }
+            }
         </style>
-        <div id="left">
-            <paper-icon-button
-                    noink
-                    class="icon"
-                    icon="error"
-                    on-click="_toggleDrawer"
-                    aria-label="Categories"
-                    color="white"></paper-icon-button>
+        <iron-ajax url="/src/wcdi-ldap-manager-app/data/users.json" last-response="{{users}}" auto></iron-ajax>
 
-            <h1 style="margin: 0px 0px 24px 0px">iam</h1>
-        </div>
-        <div id="padding">
-
-        </div>
-        <div id="right">
-            <h2 style="margin: 24px 0px 0px 0px">iam</h2>
-        </div>
+        <iron-list
+            id="list"
+            items="{{users}}"
+            as="user"
+            scroll-target="document"
+            focus="false"
+            multi-selection
+            selection-enabled
+        >
+            <template>
+                <paper-icon-item
+                    class="user-item"
+                    style="z-index: calc([[users.length]] - [[index]])"
+                    pressed
+                >
+                    <iron-image
+                        class="avatar"
+                        sizing="cover"
+                        alt="The User Avatar."
+                        slot="item-icon"
+                        src="[[user.avatarURL]]"
+                    ></iron-image>
+                    <paper-item-body two-line>
+                        <div>[[user.displayName]]</div>
+                        <div secondary>aaaaaaaaaa</div>
+                    </paper-item-body>
+                    <paper-checkbox
+                        checked$={{selected}}
+                    ></paper-checkbox>
+                    <paper-menu-button
+                        id="actionMenu"
+                        horizontal-align="right"
+                        vertical-align="top"
+                        close-on-activate
+                    >
+                        <paper-icon-button
+                            icon="more-vert"
+                            slot="dropdown-trigger"
+                        ></paper-icon-button>
+                        <paper-listbox
+                            slot="dropdown-content"
+                            selected="false"
+                        >
+                            <paper-item
+                                class="menu-item"
+                            >
+                                Edit
+                                <paper-ripple></paper-ripple>
+                            </paper-item>
+                            <paper-item
+                                class="menu-item"
+                            >
+                                Passive
+                                <paper-ripple></paper-ripple>
+                            </paper-item>
+                            <paper-item
+                                class="menu-item"
+                            >
+                                Delete
+                                <paper-ripple></paper-ripple>
+                            </paper-item>
+                        </paper-listbox>
+                    </paper-menu-button>
+                </paper-icon-item>
+            </template>
+        </iron-list>
     </template>
 
     <script>
@@ -76,13 +147,14 @@
          */
         class ViewIAM extends Polymer.Element {
             static get is() {
-              return "view-iam";
+                return "view-iam";
             }
 
             static get properties() {
                 return {
-                    logo: {
-                        type: String,
+                    users: {
+                        type: Array,
+                        value: []
                     }
                 };
             }

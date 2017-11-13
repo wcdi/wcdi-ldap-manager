@@ -1,12 +1,5 @@
-<link rel="import" href="/src/wcdi-ldap-manager-app/view-404.html">
-<link rel="import" href="/src/wcdi-ldap-manager-app/view-iam.html">
-<link rel="import" href="/bower_components/polymer/polymer-element.html">
-<link rel="import" href="/bower_components/paper-item/paper-icon-item.html">
-<link rel="import" href="/bower_components/paper-icon-button/paper-icon-button.html">
-<link rel="import" href="/bower_components/app-route/app-route.html">
-<link rel="import" href="/bower_components/app-route/app-location.html">
-<link rel="import" href="/bower_components/app-layout/app-drawer-layout/app-drawer-layout.html">
 <link rel="import" href="/bower_components/app-layout/app-drawer/app-drawer.html">
+<link rel="import" href="/bower_components/app-layout/app-drawer-layout/app-drawer-layout.html">
 <link rel="import" href="/bower_components/app-layout/app-scroll-effects/app-scroll-effects.html">
 <link rel="import" href="/bower_components/app-layout/app-header/app-header.html">
 <link rel="import" href="/bower_components/app-layout/app-header-layout/app-header-layout.html">
@@ -15,6 +8,14 @@
 <link rel="import" href="/bower_components/app-route/app-route.html">
 <link rel="import" href="/bower_components/iron-icons/iron-icons.html">
 <link rel="import" href="/bower_components/iron-pages/iron-pages.html">
+<link rel="import" href="/bower_components/paper-listbox/paper-listbox.html">
+<link rel="import" href="/bower_components/paper-item/paper-icon-item.html">
+<link rel="import" href="/bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="/bower_components/paper-ripple/paper-ripple.html">
+<link rel="import" href="/bower_components/polymer/polymer-element.html">
+<link rel="import" href="/src/wcdi-ldap-manager-app/view-404.html">
+<link rel="import" href="/src/wcdi-ldap-manager-app/view-test.html">
+<link rel="import" href="/src/wcdi-ldap-manager-app/view-iam.html">
 
 <dom-module id="wcdi-ldap-manager-app">
     <template>
@@ -36,18 +37,16 @@
                 };
             }
 
+            app-header paper-icon-button {
+                --paper-icon-button-ink-color: #fff;
+            }
+            app-drawer-layout {
+                --app-drawer-layout-content-transition: margin 0.2s;
+            }
             app-drawer {
                 --app-drawer-content-container: {
-                    background-color: transparent;
+                    background-color: #f1f1f1;
                 }
-            }
-
-            app-drawer-layout[narrow] app-drawer {
-                --app-drawer-content-container: {
-                    box-shadow: 1px 0 2px 1px rgba(0,0,0,0.18);
-                    background-color: white;
-                }
-                --app-drawer-scrim-background: rgba(0, 0, 0, 0.5);
             }
 
             .drawer-content {
@@ -58,31 +57,13 @@
                 padding: 0 12px;
             }
 
-            a {
-                color: rgb(0, 0, 0);
-                font-size: 14px;
-                text-decoration: none;
-                border-radius: 2px;
-            }
-
-            a:hover {
-                background-color: rgba(0, 0, 0, 0.1);
-            }
-
             paper-icon-item {
                 transition: all .3s ease-out;
                 cursor: pointer;
             }
 
-            iron-pages {
-                position: relative;
-                left: 0;
-                width: 100vw;
-            }
-
-            iron-pages[fit-width] {
-                left: 256px;
-                width: calc(100vw - 256px);
+            paper-icon-item:hover {
+                background-color: rgba(0, 0, 0, 0.1);
             }
 
         </style>
@@ -95,74 +76,81 @@
             tail="{{subroute}}"
         ></app-route>
         <app-header-layout>
-            <app-header condenses reveals effects="waterfall" slot="header">
+            <app-header fixed effects="waterfall" slot="header">
                 <app-toolbar>
-                    <paper-icon-button on-click="_toggleDrawer" id="toggle" icon="menu"></paper-icon-button>
+                    <paper-icon-button on-tap="_toggleDrawer" id="toggle" icon="menu"></paper-icon-button>
                     <div main-title>WCDI LDAP Manager</div>
                     <div>Logout</div>
                 </app-toolbar>
             </app-header>
-            <app-drawer-layout id="drawer-layout" narrow={{narrow}}>
-                <app-drawer id="drawer" slot="drawer" swipe-open opened={{drawerIsOpen}}>
-                    <div class="drawer-content">
-                        <a href="/dashboard">
-                            <paper-icon-item>
-                                <iron-icon icon="dashboard" slot="item-icon"></iron-icon>
-                                <span>ダッシュボード</span>
-                                <paper-ripple></paper-ripple>
-                            </paper-icon-item>
-                        </a>
-                        <a href="/iam">
-                            <paper-icon-item>
-                                <iron-icon icon="supervisor-account" slot="item-icon"></iron-icon>
-                                <span>IAM</span>
-                                <paper-ripple></paper-ripple>
-                            </paper-icon-item>
-                        </a>
-                        <a href="/bugreport">
-                            <paper-icon-item>
-                                <iron-icon icon="report-problem" slot="item-icon"></iron-icon>
-                                <span>バグ報告</span>
-                                <paper-ripple></paper-ripple>
-                            </paper-icon-item>
-                        </a>
-                    </div>
+
+            <app-drawer-layout id="drawerLayout">
+                <app-drawer id="drawer" slot="drawer" swipe-open >
+                    <paper-listbox
+                        class="drawer-content"
+                    >
+                        <paper-icon-item
+                            raised
+                            href="/dashboard"
+                        >
+                            <iron-icon icon="dashboard" slot="item-icon"></iron-icon>
+                            <span>ダッシュボード</span>
+                            <paper-ripple></paper-ripple>
+                        </paper-icon-item>
+                        <paper-icon-item
+                            raised
+                            href="/iam"
+                        >
+                            <iron-icon icon="supervisor-account" slot="item-icon"></iron-icon>
+                            <span>IAM</span>
+                            <paper-ripple></paper-ripple>
+                        </paper-icon-item>
+                        <paper-icon-item
+                            raised
+                            href="/bagreport"
+                        >
+                            <iron-icon icon="report-problem" slot="item-icon"></iron-icon>
+                            <span>バグ報告</span>
+                            <paper-ripple></paper-ripple>
+                        </paper-icon-item>
+                    </paper-listbox>
                 </app-drawer>
+
+                <iron-pages
+                    id="pages"
+                    role="main"
+                    selected="[[routeData.page]]"
+                    attr-for-selected="name"
+                    fallback-selection="404"
+                    selected-attribute="visible"
+                >
+                    <view-login
+                        name="login"
+                        logo="[[logoUrl]]"
+                        organization-name="[[organizationName]]"
+                        user-data="[[userData]]"
+                        notice={{notice}}
+                    ></view-login>
+                    <!-- list view of items in a category -->
+                    <div
+                        name="dashboard"
+                        style="background: black; height: 100%; color: white;"
+                    >
+                        dashboard
+                    </div>
+                    <view-iam
+                        name="iam"
+                    ></view-iam>
+                    <view-test
+                        name="a"
+                    ></view-test>
+                    <view-404
+                        name="404"
+                    ></view-404>
+                </iron-pages>
             </app-drawer-layout>
         </app-header-layout>
 
-        <iron-pages
-            id="pages"
-            role="main"
-            selected="[[routeData.page]]"
-            attr-for-selected="name"
-            selected-attribute="visible"
-            fallback-selection="404"
-            fit-width$="[[_isFitWidth(drawerIsOpen)]]"
-        >
-            <div
-                name="dashboard"
-                style="background: black; height: 100%; color: white;"
-            >
-                test element
-            </div>
-            <view-login
-                name="login"
-                logo="[[logoUrl]]"
-                organization-name="[[organizationName]]"
-                user-data="[[userData]]"
-                notice={{notice}}
-            ></view-login>
-
-            <!-- list view of items in a category -->
-            <view-iam
-                name="user"
-            ></view-user>
-            <view-404
-                name="404"
-                logo="{{logoUrl}}
-            "></view-404>
-        </iron-pages>
     </template>
 
     <script>
@@ -176,24 +164,15 @@
             }
 
             static get properties() {
-                return {
-                    drawerIsOpen: {
-                        type    : Boolean,
-                        value   : false
-                    },
-                    narrow: {
-                        type    : Boolean,
-                        value   : false
-                    }
-                };
+                return {};
             }
 
-            _isFitWidth() {
-                return !this.narrow && this.drawerIsOpen
-            }
 
             _toggleDrawer() {
-                this.drawerIsOpen = !this.drawerIsOpen;
+                if (this.$.drawerLayout.forceNarrow || !this.$.drawerLayout.narrow)
+                    this.$.drawerLayout.forceNarrow = !this.$.drawerLayout.forceNarrow;
+                else
+                    this.$.drawerLayout.drawer.toggle();
             }
         }
 

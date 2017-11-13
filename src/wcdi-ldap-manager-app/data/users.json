@@ -1,0 +1,444 @@
+[
+    {
+        "avatarURL": "https://s3.amazonaws.com/uifaces/faces/twitter/enda/73.jpg",
+        "birthday": "Wed Feb 01 1950 00:00:00 GMT+0900 (JST)",
+        "createdDate": "Sat Nov 11 2017 02:56:12 GMT+0900 (JST)",
+        "displayName": "ore",
+        "domain": "http://www.neec.ac.jp/",
+        "emergencyPhone": "000-0000-0000",
+        "email": [
+          "isabelconrad@scentric.com"
+        ],
+        "firstName": "名",
+        "githubUsername": "neec",
+        "groups": [
+          "admin"
+        ],
+        "id": 0,
+        "lastName": "姓",
+        "locations": [
+          {
+              "address": "東京都八王子市片倉町1404-1",
+              "zip": "192-0983"
+          }
+        ],
+        "phoneNumbers": [
+          "0120-444-700"
+        ],
+        "qualifications": [
+          "基本情報技術者試験"
+        ],
+        "sex": "man",
+        "slackUsername": "neec",
+        "studentNumber": "G0XXCXXXX",
+        "zipCode": "192-0983"
+    },
+    {
+        "avatarURL": "https://s3.amazonaws.com/uifaces/faces/twitter/enda/73.jpg",
+        "birthday": "Wed Feb 01 1950 00:00:00 GMT+0900 (JST)",
+        "createdDate": "Sat Nov 11 2017 02:56:12 GMT+0900 (JST)",
+        "displayName": "tester",
+        "domain": "http://www.neec.ac.jp/",
+        "emergencyPhone": "000-0000-0000",
+        "email": [
+            "isabelconrad@scentric.com"
+        ],
+        "firstName": "名",
+        "githubUsername": "neec",
+        "groups": [
+            "admin"
+        ],
+        "id": 1,
+        "lastName": "姓",
+        "locations": [
+            {
+                "address": "東京都八王子市片倉町1404-1",
+                "zip": "192-0983"
+            }
+        ],
+        "phoneNumbers":[
+            "0120-444-700"
+        ],
+        "qualifications": [
+            "基本情報技術者試験"
+        ],
+        "sex": "man",
+        "slackUsername": "neec",
+        "studentNumber": "G0XXCXXXX",
+        "zipCode": "192-0983"
+    },
+    {
+        "avatarURL": "https://s3.amazonaws.com/uifaces/faces/twitter/enda/73.jpg",
+        "birthday": "Wed Jul 15 1996 00:00:00 GMT+0900 (JST)",
+        "createdDate": "Mon Nov 13 2017 12:38:28 GMT+0900 (JST)",
+        "displayName": "awamura",
+        "domain": "",
+        "emergencyPhone": "000-0000-0000",
+        "email": [
+            "awamura@gmail.com"
+        ],
+        "firstName": "亮介",
+        "githubUsername": "awamura",
+        "groups": [
+            "admin"
+        ],
+        "id": 2,
+        "lastName": "粟村",
+        "locations": [
+            {
+                "address": "東京都八王子市片倉町1404-1",
+                "zip": "192-0983"
+            }
+        ],
+        "phoneNumbers":[
+            "0120-444-700"
+        ],
+        "qualifications": [
+            "基本情報技術者試験"
+        ],
+        "sex": "man",
+        "slackUsername": "awamura",
+        "studentNumber": "G0XXCXXXX",
+        "zipCode": "192-0983"
+    },
+    {
+        "avatarURL": "https://s3.amazonaws.com/uifaces/faces/twitter/enda/73.jpg",
+        "birthday": "Wed Jul 15 1996 00:00:00 GMT+0900 (JST)",
+        "createdDate": "Mon Nov 13 2017 12:38:28 GMT+0900 (JST)",
+        "displayName": "awamura",
+        "domain": "",
+        "emergencyPhone": "000-0000-0000",
+        "email": [
+            "awamura@gmail.com"
+        ],
+        "firstName": "亮介",
+        "githubUsername": "awamura",
+        "groups": [
+            "admin"
+        ],
+        "id": 3,
+        "lastName": "粟村",
+        "locations": [
+            {
+                "address": "東京都八王子市片倉町1404-1",
+                "zip": "192-0983"
+            }
+        ],
+        "phoneNumbers":[
+            "0120-444-700"
+        ],
+        "qualifications": [
+            "基本情報技術者試験"
+        ],
+        "sex": "man",
+        "slackUsername": "awamura",
+        "studentNumber": "G0XXCXXXX",
+        "zipCode": "192-0983"
+    },
+    {
+        "avatarURL": "https://s3.amazonaws.com/uifaces/faces/twitter/enda/73.jpg",
+        "birthday": "Wed Jul 15 1996 00:00:00 GMT+0900 (JST)",
+        "createdDate": "Mon Nov 13 2017 12:38:28 GMT+0900 (JST)",
+        "displayName": "awamura",
+        "domain": "",
+        "emergencyPhone": "000-0000-0000",
+        "email": [
+            "awamura@gmail.com"
+        ],
+        "firstName": "亮介",
+        "githubUsername": "awamura",
+        "groups": [
+            "admin"
+        ],
+        "id": 4,
+        "lastName": "粟村",
+        "locations": [
+            {
+                "address": "東京都八王子市片倉町1404-1",
+                "zip": "192-0983"
+            }
+        ],
+        "phoneNumbers":[
+            "0120-444-700"
+        ],
+        "qualifications": [
+            "基本情報技術者試験"
+        ],
+        "sex": "man",
+        "slackUsername": "awamura",
+        "studentNumber": "G0XXCXXXX",
+        "zipCode": "192-0983"
+    },
+    {
+        "avatarURL": "https://s3.amazonaws.com/uifaces/faces/twitter/enda/73.jpg",
+        "birthday": "Wed Jul 15 1996 00:00:00 GMT+0900 (JST)",
+        "createdDate": "Mon Nov 13 2017 12:38:28 GMT+0900 (JST)",
+        "displayName": "awamura",
+        "domain": "",
+        "emergencyPhone": "000-0000-0000",
+        "email": [
+            "awamura@gmail.com"
+        ],
+        "firstName": "亮介",
+        "githubUsername": "awamura",
+        "groups": [
+            "admin"
+        ],
+        "id": 5,
+        "lastName": "粟村",
+        "locations": [
+            {
+                "address": "東京都八王子市片倉町1404-1",
+                "zip": "192-0983"
+            }
+        ],
+        "phoneNumbers":[
+            "0120-444-700"
+        ],
+        "qualifications": [
+            "基本情報技術者試験"
+        ],
+        "sex": "man",
+        "slackUsername": "awamura",
+        "studentNumber": "G0XXCXXXX",
+        "zipCode": "192-0983"
+    },
+    {
+        "avatarURL": "https://s3.amazonaws.com/uifaces/faces/twitter/enda/73.jpg",
+        "birthday": "Wed Jul 15 1996 00:00:00 GMT+0900 (JST)",
+        "createdDate": "Mon Nov 13 2017 12:38:28 GMT+0900 (JST)",
+        "displayName": "awamura",
+        "domain": "",
+        "emergencyPhone": "000-0000-0000",
+        "email": [
+            "awamura@gmail.com"
+        ],
+        "firstName": "亮介",
+        "githubUsername": "awamura",
+        "groups": [
+            "admin"
+        ],
+        "id": 6,
+        "lastName": "粟村",
+        "locations": [
+            {
+                "address": "東京都八王子市片倉町1404-1",
+                "zip": "192-0983"
+            }
+        ],
+        "phoneNumbers":[
+            "0120-444-700"
+        ],
+        "qualifications": [
+            "基本情報技術者試験"
+        ],
+        "sex": "man",
+        "slackUsername": "awamura",
+        "studentNumber": "G0XXCXXXX",
+        "zipCode": "192-0983"
+    },
+    {
+        "avatarURL": "https://s3.amazonaws.com/uifaces/faces/twitter/enda/73.jpg",
+        "birthday": "Wed Jul 15 1996 00:00:00 GMT+0900 (JST)",
+        "createdDate": "Mon Nov 13 2017 12:38:28 GMT+0900 (JST)",
+        "displayName": "awamura",
+        "domain": "",
+        "emergencyPhone": "000-0000-0000",
+        "email": [
+            "awamura@gmail.com"
+        ],
+        "firstName": "亮介",
+        "githubUsername": "awamura",
+        "groups": [
+            "admin"
+        ],
+        "id": 7,
+        "lastName": "粟村",
+        "locations": [
+            {
+                "address": "東京都八王子市片倉町1404-1",
+                "zip": "192-0983"
+            }
+        ],
+        "phoneNumbers":[
+            "0120-444-700"
+        ],
+        "qualifications": [
+            "基本情報技術者試験"
+        ],
+        "sex": "man",
+        "slackUsername": "awamura",
+        "studentNumber": "G0XXCXXXX",
+        "zipCode": "192-0983"
+    },
+    {
+        "avatarURL": "https://s3.amazonaws.com/uifaces/faces/twitter/enda/73.jpg",
+        "birthday": "Wed Jul 15 1996 00:00:00 GMT+0900 (JST)",
+        "createdDate": "Mon Nov 13 2017 12:38:28 GMT+0900 (JST)",
+        "displayName": "awamura",
+        "domain": "",
+        "emergencyPhone": "000-0000-0000",
+        "email": [
+            "awamura@gmail.com"
+        ],
+        "firstName": "亮介",
+        "githubUsername": "awamura",
+        "groups": [
+            "admin"
+        ],
+        "id": 8,
+        "lastName": "粟村",
+        "locations": [
+            {
+                "address": "東京都八王子市片倉町1404-1",
+                "zip": "192-0983"
+            }
+        ],
+        "phoneNumbers":[
+            "0120-444-700"
+        ],
+        "qualifications": [
+            "基本情報技術者試験"
+        ],
+        "sex": "man",
+        "slackUsername": "awamura",
+        "studentNumber": "G0XXCXXXX",
+        "zipCode": "192-0983"
+    },
+    {
+        "avatarURL": "https://s3.amazonaws.com/uifaces/faces/twitter/enda/73.jpg",
+        "birthday": "Wed Jul 15 1996 00:00:00 GMT+0900 (JST)",
+        "createdDate": "Mon Nov 13 2017 12:38:28 GMT+0900 (JST)",
+        "displayName": "awamura",
+        "domain": "",
+        "emergencyPhone": "000-0000-0000",
+        "email": [
+            "awamura@gmail.com"
+        ],
+        "firstName": "亮介",
+        "githubUsername": "awamura",
+        "groups": [
+            "admin"
+        ],
+        "id": 9,
+        "lastName": "粟村",
+        "locations": [
+            {
+                "address": "東京都八王子市片倉町1404-1",
+                "zip": "192-0983"
+            }
+        ],
+        "phoneNumbers":[
+            "0120-444-700"
+        ],
+        "qualifications": [
+            "基本情報技術者試験"
+        ],
+        "sex": "man",
+        "slackUsername": "awamura",
+        "studentNumber": "G0XXCXXXX",
+        "zipCode": "192-0983"
+    },
+    {
+        "avatarURL": "https://s3.amazonaws.com/uifaces/faces/twitter/enda/73.jpg",
+        "birthday": "Wed Jul 15 1996 00:00:00 GMT+0900 (JST)",
+        "createdDate": "Mon Nov 13 2017 12:38:28 GMT+0900 (JST)",
+        "displayName": "awamura",
+        "domain": "",
+        "emergencyPhone": "000-0000-0000",
+        "email": [
+            "awamura@gmail.com"
+        ],
+        "firstName": "亮介",
+        "githubUsername": "awamura",
+        "groups": [
+            "admin"
+        ],
+        "id": 10,
+        "lastName": "粟村",
+        "locations": [
+            {
+                "address": "東京都八王子市片倉町1404-1",
+                "zip": "192-0983"
+            }
+        ],
+        "phoneNumbers":[
+            "0120-444-700"
+        ],
+        "qualifications": [
+            "基本情報技術者試験"
+        ],
+        "sex": "man",
+        "slackUsername": "awamura",
+        "studentNumber": "G0XXCXXXX",
+        "zipCode": "192-0983"
+    },
+    {
+        "avatarURL": "https://s3.amazonaws.com/uifaces/faces/twitter/enda/73.jpg",
+        "birthday": "Wed Jul 15 1996 00:00:00 GMT+0900 (JST)",
+        "createdDate": "Mon Nov 13 2017 12:38:28 GMT+0900 (JST)",
+        "displayName": "awamura",
+        "domain": "",
+        "emergencyPhone": "000-0000-0000",
+        "email": [
+            "awamura@gmail.com"
+        ],
+        "firstName": "亮介",
+        "githubUsername": "awamura",
+        "groups": [
+            "admin"
+        ],
+        "id": 11,
+        "lastName": "粟村",
+        "locations": [
+            {
+                "address": "東京都八王子市片倉町1404-1",
+                "zip": "192-0983"
+            }
+        ],
+        "phoneNumbers":[
+            "0120-444-700"
+        ],
+        "qualifications": [
+            "基本情報技術者試験"
+        ],
+        "sex": "man",
+        "slackUsername": "awamura",
+        "studentNumber": "G0XXCXXXX",
+        "zipCode": "192-0983"
+    },
+    {
+        "avatarURL": "https://s3.amazonaws.com/uifaces/faces/twitter/enda/73.jpg",
+        "birthday": "Wed Jul 15 1996 00:00:00 GMT+0900 (JST)",
+        "createdDate": "Mon Nov 13 2017 12:38:28 GMT+0900 (JST)",
+        "displayName": "awamura",
+        "domain": "",
+        "emergencyPhone": "000-0000-0000",
+        "email": [
+            "awamura@gmail.com"
+        ],
+        "firstName": "亮介",
+        "githubUsername": "awamura",
+        "groups": [
+            "admin"
+        ],
+        "id": 12,
+        "lastName": "粟村",
+        "locations": [
+            {
+                "address": "東京都八王子市片倉町1404-1",
+                "zip": "192-0983"
+            }
+        ],
+        "phoneNumbers":[
+            "0120-444-700"
+        ],
+        "qualifications": [
+            "基本情報技術者試験"
+        ],
+        "sex": "man",
+        "slackUsername": "awamura",
+        "studentNumber": "G0XXCXXXX",
+        "zipCode": "192-0983"
+    }
+]
