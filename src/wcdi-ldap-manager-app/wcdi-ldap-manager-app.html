@@ -174,8 +174,8 @@
                     </div>
                     <view-iam
                         id="viewIAM"
-                        custom-event="[[myCustomEvent]]"
                         name="iam"
+                        selected-user-ids={{selectedUserIds}}
                     ></view-iam>
                     <view-test
                         name="a"
@@ -212,7 +212,17 @@
                             detail: {}
                         }
                     },
+                    selectedUserIds: {
+                        type: Array,
+                        value: [],
+                    }
                 }
+            }
+
+            static get observers() {
+                return [
+                    "_updateSelectedUserIds(selectedUserIds.*)"
+                ]
             }
 
             ready() {
@@ -230,8 +240,17 @@
                 this.set("route.path", event.currentTarget.getAttribute("path"))
             }
 
-            headerState() {
-                console.log('custom')
+            _updateSelectedUserIds() {
+
+                this.headerState = (
+                    {
+                        type: this.selectedUserIds.length ? "itemIsSelecting" : "main",
+                        detail: {
+                            count: this.selectedUserIds.length
+                        }
+                    }
+                )
+                
             }
         }
 

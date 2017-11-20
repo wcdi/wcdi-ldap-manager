@@ -171,10 +171,7 @@
                     users: {
                         type: Array,
                         value: []
-                    },
-                    customEvent: {
-
-                    },
+                    }
                 };
             }
 
@@ -203,11 +200,6 @@
                     this.selectedUserIds = this.selectedUserIds.filter(x => x != id)
                 else
                     this.selectedUserIds = this.selectedUserIds.concat(id)
-
-                this.customEvent({
-                    count : this.selectedUserIds.length,
-                    deselectAll: this.deselectAllUser
-                })
 
             }
 
