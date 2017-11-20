@@ -1,0 +1,214 @@
+<link rel="import" href="/bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="/bower_components/iron-dropdown/iron-dropdown.html">
+<link rel="import" href="/bower_components/iron-icons/iron-icons.html">
+<link rel="import" href="/bower_components/iron-image/iron-image.html">
+<link rel="import" href="/bower_components/iron-list/iron-list.html">
+<link rel="import" href="/bower_components/neon-animation/web-animations.html">
+<link rel="import" href="/bower_components/neon-animation/animations/scale-up-animation.html">
+<link rel="import" href="/bower_components/neon-animation/animations/fade-out-animation.html">
+<link rel="import" href="/bower_components/paper-checkbox/paper-checkbox.html">
+<link rel="import" href="/bower_components/paper-dialog/paper-dialog.html">
+<link rel="import" href="/bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="/bower_components/paper-item/paper-icon-item.html">
+<link rel="import" href="/bower_components/paper-item/paper-item.html">
+<link rel="import" href="/bower_components/paper-item/paper-item-body.html">
+<link rel="import" href="/bower_components/paper-listbox/paper-listbox.html">
+<link rel="import" href="/bower_components/paper-menu-button/paper-menu-button.html">
+<link rel="import" href="/bower_components/paper-ripple/paper-ripple.html">
+<link rel="import" href="/bower_components/paper-toolbar/paper-toolbar.html">
+<link rel="import" href="/bower_components/polymer/polymer-element.html">
+
+<dom-module id="view-iam">
+    <template>
+        <style>
+            :host {
+                display: block;
+                @apply --paper-font-common-base;
+            }
+
+            #list {
+                --iron-list-items-container: {
+                    background-color: white;
+                    box-shadow      : rgba(0, 0, 0, 0.14) 0px 2px 2px 0px,
+                                      rgba(0, 0, 0, 0.12) 0px 1px 5px 0px,
+                                      rgba(0, 0, 0, 0.2) 0px 3px 1px -2px;
+                };
+                margin    : 0 auto;
+                margin-top: 24px;
+                max-width : 960px;
+                padding   : 24px;
+                width     : calc(100% - 2 * 24px);
+            }
+
+            .user-item {
+                background-color: #fafbfd;
+                color     : var(--primary-text-color);
+                cursor    : pointer;
+                display   : flex;
+                transition: all .3s ease-out;
+                --paper-item-focused-before: {
+                     background: initial;
+                };
+            }
+
+            paper-icon-item:hover,
+            paper-item:hover {
+                background-color: rgba(241, 242, 242, 1);
+            }
+
+            iron-image {
+                display: inline-block;
+                box-sizing: border-box;
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                background: var(--paper-amber-500);
+            }
+
+            .menu-item {
+                --paper-item-selected: {
+                    font-weight: initial;
+                }
+            }
+        </style>
+        <iron-ajax url="/src/wcdi-ldap-manager-app/data/users.json" last-response="{{users}}" auto></iron-ajax>
+
+
+        <iron-list
+            id="list"
+            items="{{users}}"
+            as="user"
+            scroll-target="document"
+            focus="true"
+        >
+            <template>
+                <paper-icon-item
+                    class="user-item"
+                    style="z-index: calc([[users.length]] - [[index]])"
+                    on-tap="_onUserItemClick"
+                    data-id$="[[user.id]]"
+                >
+                    <iron-image
+                        class="avatar"
+                        sizing="cover"
+                        alt="The User Avatar."
+                        slot="item-icon"
+                        src="[[user.avatarURL]]"
+                    ></iron-image>
+                    <paper-item-body two-line>
+                        <div>[[user.displayName]]</div>
+                        <div secondary>[[user.lastName]] [[user.firstName]]</div>
+                    </paper-item-body>
+                    <paper-item-body two-line>
+                        <div>[[user.studentNumber]]</div>
+                        <div secondary>[[user.email]]</div>
+                    </paper-item-body>
+                    <paper-item-body two-line>
+                        <div>[[user.phoneNumbers]]</div>
+                        <div secondary>[[user.domain]]</div>
+                    </paper-item-body>
+                    <paper-checkbox
+                        checked$="[[_isSelected(index, selectedUserIds)]]"
+                    >[[_isSelected(index, selectedUserIds)]][[index]]</paper-checkbox>
+                    <paper-menu-button
+                        id="actionMenu"
+                        on-tap="_stopPropagation"
+                        horizontal-align="right"
+                        vertical-align="top"
+                        close-on-activate
+                    >
+                        <paper-icon-button
+                            icon="more-vert"
+                            slot="dropdown-trigger"
+                        ></paper-icon-button>
+                        <paper-listbox
+                            slot="dropdown-content"
+                            selected="false"
+                        >
+                            <paper-item
+                                class="menu-item"
+                            >
+                                Edit
+                                <paper-ripple></paper-ripple>
+                            </paper-item>
+                            <paper-item
+                                class="menu-item"
+                            >
+                                Passive
+                                <paper-ripple></paper-ripple>
+                            </paper-item>
+                            <paper-item
+                                class="menu-item"
+                            >
+                                Delete
+                                <paper-ripple></paper-ripple>
+                            </paper-item>
+                        </paper-listbox>
+                    </paper-menu-button>
+                </paper-icon-item>
+            </template>
+        </iron-list>
+    </template>
+
+    <script>
+        /**
+         * @customElement
+         * @polymer
+         */
+        class ViewIAM extends Polymer.Element {
+            static get is() {
+                return "view-iam";
+            }
+
+            static get properties() {
+                return {
+                    selectedUserIds: {
+                        type: Array,
+                        value: [],
+                        notify: true,
+                        readOnly: false
+                    },
+                    users: {
+                        type: Array,
+                        value: []
+                    }
+                };
+            }
+
+            ready() {
+                super.ready();
+            }
+
+            deselectAllUser() {
+                console.log(this)
+                this.selectedUserIds = []
+            }
+
+            selectAllUser() {
+                console.log(this)
+                this.selectedUserIds = this.users.map(x => x.id)
+            }
+
+            _stopPropagation(e) {
+                e.stopPropagation()
+            }
+
+            _onUserItemClick(event) {
+                let id = parseInt(event.currentTarget.dataset.id)
+
+                if(this.selectedUserIds.includes(id))
+                    this.selectedUserIds = this.selectedUserIds.filter(x => x != id)
+                else
+                    this.selectedUserIds = this.selectedUserIds.concat(id)
+
+            }
+
+            _isSelected(index) {
+                return this.selectedUserIds.includes(index)
+            }
+
+        }
+
+        window.customElements.define(ViewIAM.is, ViewIAM);
+    </script>
+</dom-module>

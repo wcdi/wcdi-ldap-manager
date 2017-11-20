@@ -1,10 +1,5 @@
-<link rel="import" href="/bower_components/polymer/polymer-element.html">
-<link rel="import" href="/bower_components/paper-item/paper-icon-item.html">
-<link rel="import" href="/bower_components/paper-icon-button/paper-icon-button.html">
-<link rel="import" href="/bower_components/app-route/app-route.html">
-<link rel="import" href="/bower_components/app-route/app-location.html">
-<link rel="import" href="/bower_components/app-layout/app-drawer-layout/app-drawer-layout.html">
 <link rel="import" href="/bower_components/app-layout/app-drawer/app-drawer.html">
+<link rel="import" href="/bower_components/app-layout/app-drawer-layout/app-drawer-layout.html">
 <link rel="import" href="/bower_components/app-layout/app-scroll-effects/app-scroll-effects.html">
 <link rel="import" href="/bower_components/app-layout/app-header/app-header.html">
 <link rel="import" href="/bower_components/app-layout/app-header-layout/app-header-layout.html">
@@ -13,128 +8,185 @@
 <link rel="import" href="/bower_components/app-route/app-route.html">
 <link rel="import" href="/bower_components/iron-icons/iron-icons.html">
 <link rel="import" href="/bower_components/iron-pages/iron-pages.html">
+<link rel="import" href="/bower_components/paper-listbox/paper-listbox.html">
+<link rel="import" href="/bower_components/paper-item/paper-icon-item.html">
+<link rel="import" href="/bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="/bower_components/paper-ripple/paper-ripple.html">
+<link rel="import" href="/bower_components/polymer/polymer-element.html">
+<link rel="import" href="/src/wcdi-ldap-manager-app/view-404.html">
+<link rel="import" href="/src/wcdi-ldap-manager-app/view-test.html">
+<link rel="import" href="/src/wcdi-ldap-manager-app/view-iam.html">
 
 <dom-module id="wcdi-ldap-manager-app">
     <template>
         <style>
             :host {
                 display: block;
+                --app-drawer-width: 256px;
             }
 
             app-header-layout {
-                z-index: 900;
+                z-index: 1;
             }
 
             app-header {
-                background-color: #2e2c34;
-                color: rgb(255, 255, 255);
+                color           : rgb(255, 255, 255);
                 --app-header-shadow: {
                     opacity: 1;
                     box-shadow: inset 0px 5px 5px -3px rgba(0, 0, 0, 0.5);
                 };
             }
 
+            app-toolbar[header-state="main"] {
+                background-color: #2e2c34;
+            }
+
+            app-toolbar[header-state="itemIsSelecting"] {
+                background-color: #b20c00;
+            }
+
+            :not([narrow]) app-toolbar[header-state="itemIsSelecting"] [select-count] {
+                position: absolute;
+                left: calc(var(--app-drawer-width, 256px) + 20px);
+            }
+
+            app-toolbar paper-icon-button {
+                --paper-icon-button-ink-color: #fff;
+            }
+
+            app-toolbar paper-icon-button + [main-text] {
+                margin-left: 24px;
+            }
+
+            app-drawer-layout {
+                --app-drawer-layout-content-transition: margin 0.2s;
+            }
+
+            app-drawer {
+                --app-drawer-content-container: {
+                    background-color: #f1f1f1;
+                }
+            }
+
             .drawer-content {
+                background-color: transparent;
                 margin-top: 80px;
                 height: calc(100vh - 80px);
                 overflow: auto;
-            }
-
-            a {
-                color: rgb(0, 0, 0);
-                font-size: 14px;
-                text-decoration: none;
+                padding: 0 12px;
             }
 
             paper-icon-item {
                 transition: all .3s ease-out;
                 cursor: pointer;
-                border-radius: 2px;
             }
 
             paper-icon-item:hover {
                 background-color: rgba(0, 0, 0, 0.1);
             }
 
-            iron-pages {
-                position: relative;
-                left: 0;
-            }
-
-            iron-pages[drawer-viewed] {
-                left: 256px
-            }
 
         </style>
 
         <app-location route="{{route}}"></app-location>
         <app-route
+            id="route"
             route="{{route}}"
             pattern="/:page"
             data="{{routeData}}"
             tail="{{subroute}}"
         ></app-route>
-        <app-header-layout>
-            <app-header condenses reveals effects="waterfall" slot="header">
-                <app-toolbar>
-                    <paper-icon-button on-click="_toggleDrawer" id="toggle" icon="menu"></paper-icon-button>
-                    <div main-title>WCDI LDAP Manager</div>
-                    <div>Logout</div>
-                </app-toolbar>
+        <app-header-layout narrow$={{narrow}}>
+            <app-header fixed effects="waterfall" slot="header">
+                <iron-pages
+                    selected="[[headerState.type]]"
+                    attr-for-selected="header-state"
+                    fallback-selection="main"
+                >
+                    <app-toolbar header-state="main">
+                        <paper-icon-button on-tap="_toggleDrawer" id="toggle" icon="menu"></paper-icon-button>
+                        <div main-title main-text>WCDI</div>
+                    </app-toolbar>
+                    <app-toolbar header-state="itemIsSelecting">
+                        <paper-icon-button on-tap="" id="toggle" icon="arrow-back"></paper-icon-button>
+                        <div main-text>戻る</div>
+                        <div select-count>[[headerState.detail.count]]件 選択中</div>
+                    </app-toolbar>
+                </iron-pages>
             </app-header>
-            <app-drawer-layout id="drawer-layout">
-                <app-drawer id="drawer" slot="drawer" swipe-open opened={{drawerState}}>
-                    <div class="drawer-content">
-                        <a href="/dashboard">
-                            <paper-icon-item>
-                                <iron-icon icon="dashboard" slot="item-icon"></iron-icon>
-                                <span>ダッシュボード</span>
-                                <paper-ripple></paper-ripple>
-                            </paper-icon-item>
-                        </a>
-                        <a href="/bugreport">
-                            <paper-icon-item>
-                                <iron-icon icon="report-problem" slot="item-icon"></iron-icon>
-                                <span>バグ報告</span>
-                                <paper-ripple></paper-ripple>
-                            </paper-icon-item>
-                        </a>
-                    </div>
+
+            <app-drawer-layout id="drawerLayout" narrow={{narrow}}>
+                <app-drawer id="drawer" slot="drawer" swipe-open>
+                    <paper-listbox
+                        class="drawer-content"
+                    >
+                        <paper-icon-item
+                            path="/dashboard"
+                            on-tap="_onDrawerItemClick"
+                            raised
+                        >
+                            <iron-icon icon="dashboard" slot="item-icon"></iron-icon>
+                            <span>ダッシュボード</span>
+                            <paper-ripple></paper-ripple>
+                        </paper-icon-item>
+                        <paper-icon-item
+                            path="/iam"
+                            on-tap="_onDrawerItemClick"
+                            raised
+                        >
+                            <iron-icon icon="supervisor-account" slot="item-icon"></iron-icon>
+                            <span>IAM</span>
+                            <paper-ripple></paper-ripple>
+                        </paper-icon-item>
+                        <paper-icon-item
+                            path="/bagreport"
+                            on-tap="_onDrawerItemClick"
+                            raised
+                        >
+                            <iron-icon icon="report-problem" slot="item-icon"></iron-icon>
+                            <span>バグ報告</span>
+                            <paper-ripple></paper-ripple>
+                        </paper-icon-item>
+                    </paper-listbox>
                 </app-drawer>
+
+                <iron-pages
+                    id="pages"
+                    role="main"
+                    selected="[[routeData.page]]"
+                    attr-for-selected="name"
+                    fallback-selection="404"
+                    selected-attribute="visible"
+                >
+                    <view-login
+                        name="login"
+                        logo="[[logoUrl]]"
+                        organization-name="[[organizationName]]"
+                        user-data="[[userData]]"
+                        notice={{notice}}
+                    ></view-login>
+                    <!-- list view of items in a category -->
+                    <div
+                        name="dashboard"
+                        style="background: black; height: 100%; color: white;"
+                    >
+                        dashboard[[narrow]]
+                    </div>
+                    <view-iam
+                        id="viewIAM"
+                        name="iam"
+                        selected-user-ids={{selectedUserIds}}
+                    ></view-iam>
+                    <view-test
+                        name="a"
+                    ></view-test>
+                    <view-404
+                        name="404"
+                    ></view-404>
+                </iron-pages>
             </app-drawer-layout>
         </app-header-layout>
 
-        <iron-pages
-            role="main"
-            selected="[[routeData.page]]"
-            attr-for-selected="name"
-            selected-attribute="visible"
-            fallback-selection="404"
-            drawer-viewed$="[[drawerState]]"
-        >
-            <div
-                name="dashboard"
-                style="background: black; height: 100%;"
-            >
-                test element
-            </div>
-            <view-login
-                name="login"
-                logo="[[logoUrl]]"
-                organization-name="[[organizationName]]"
-                user-data="[[userData]]"
-                notice={{notice}}
-            ></view-login>
-
-            <!-- list view of items in a category -->
-            <view-user
-                name="user"
-                offline="[[offline]]"
-                route={{subroute}}
-                drawer-state="{{drawerState}}"
-            ></view-user>
-            <view-404 name="404" logo="{{logoUrl}}"></view-404>
-        </iron-pages>
     </template>
 
     <script>
@@ -144,24 +196,64 @@
          */
         class WcdiLdapManagerApp extends Polymer.Element {
             static get is() {
-                return 'wcdi-ldap-manager-app';
+                return "wcdi-ldap-manager-app"
+            }
+
+            test() {
+                console.log('test')
             }
 
             static get properties() {
                 return {
-                    drawerState: {
-                        type    : Boolean,
-                        value   : false,
+                    headerState: {
+                        type: Object,
+                        value: {
+                            type: "main",
+                            detail: {}
+                        }
+                    },
+                    selectedUserIds: {
+                        type: Array,
+                        value: [],
                     }
-                };
+                }
+            }
+
+            static get observers() {
+                return [
+                    "_updateSelectedUserIds(selectedUserIds.*)"
+                ]
+            }
+
+            ready() {
+                super.ready();
             }
 
             _toggleDrawer() {
-                this.drawerState = !this.drawerState;
-                console.log(this.__proto__)
+                if (this.$.drawerLayout.forceNarrow || !this.$.drawerLayout.narrow)
+                    this.$.drawerLayout.forceNarrow = !this.$.drawerLayout.forceNarrow
+                else
+                    this.$.drawerLayout.drawer.toggle()
+            }
+
+            _onDrawerItemClick(event) {
+                this.set("route.path", event.currentTarget.getAttribute("path"))
+            }
+
+            _updateSelectedUserIds() {
+
+                this.headerState = (
+                    {
+                        type: this.selectedUserIds.length ? "itemIsSelecting" : "main",
+                        detail: {
+                            count: this.selectedUserIds.length
+                        }
+                    }
+                )
+                
             }
         }
 
-        window.customElements.define(WcdiLdapManagerApp.is, WcdiLdapManagerApp);
+        window.customElements.define(WcdiLdapManagerApp.is, WcdiLdapManagerApp)
     </script>
 </dom-module>
