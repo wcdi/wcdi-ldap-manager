@@ -15,6 +15,7 @@
 <link rel="import" href="/bower_components/paper-listbox/paper-listbox.html">
 <link rel="import" href="/bower_components/paper-menu-button/paper-menu-button.html">
 <link rel="import" href="/bower_components/paper-ripple/paper-ripple.html">
+<link rel="import" href="/bower_components/paper-toolbar/paper-toolbar.html">
 <link rel="import" href="/bower_components/polymer/polymer-element.html">
 
 <dom-module id="view-iam">
@@ -72,20 +73,20 @@
         </style>
         <iron-ajax url="/src/wcdi-ldap-manager-app/data/users.json" last-response="{{users}}" auto></iron-ajax>
 
+
         <iron-list
             id="list"
             items="{{users}}"
             as="user"
             scroll-target="document"
-            focus="false"
-            multi-selection
-            selection-enabled
+            focus="true"
         >
             <template>
                 <paper-icon-item
                     class="user-item"
                     style="z-index: calc([[users.length]] - [[index]])"
-                    pressed
+                    on-tap="_onUserItemClick"
+                    data-id$="[[user.id]]"
                 >
                     <iron-image
                         class="avatar"
@@ -96,13 +97,22 @@
                     ></iron-image>
                     <paper-item-body two-line>
                         <div>[[user.displayName]]</div>
-                        <div secondary>aaaaaaaaaa</div>
+                        <div secondary>[[user.lastName]] [[user.firstName]]</div>
+                    </paper-item-body>
+                    <paper-item-body two-line>
+                        <div>[[user.studentNumber]]</div>
+                        <div secondary>[[user.email]]</div>
+                    </paper-item-body>
+                    <paper-item-body two-line>
+                        <div>[[user.phoneNumbers]]</div>
+                        <div secondary>[[user.domain]]</div>
                     </paper-item-body>
                     <paper-checkbox
-                        checked$={{selected}}
-                    ></paper-checkbox>
+                        checked$="[[_isSelected(index, selectedUserIds)]]"
+                    >[[_isSelected(index, selectedUserIds)]][[index]]</paper-checkbox>
                     <paper-menu-button
                         id="actionMenu"
+                        on-tap="_stopPropagation"
                         horizontal-align="right"
                         vertical-align="top"
                         close-on-activate
@@ -152,16 +162,59 @@
 
             static get properties() {
                 return {
+                    selectedUserIds: {
+                        type: Array,
+                        value: [],
+                        notify: true,
+                        readOnly: false
+                    },
                     users: {
                         type: Array,
                         value: []
-                    }
+                    },
+                    customEvent: {
+
+                    },
                 };
             }
 
             ready() {
                 super.ready();
             }
+
+            deselectAllUser() {
+                console.log(this)
+                this.selectedUserIds = []
+            }
+
+            selectAllUser() {
+                console.log(this)
+                this.selectedUserIds = this.users.map(x => x.id)
+            }
+
+            _stopPropagation(e) {
+                e.stopPropagation()
+            }
+
+            _onUserItemClick(event) {
+                let id = parseInt(event.currentTarget.dataset.id)
+
+                if(this.selectedUserIds.includes(id))
+                    this.selectedUserIds = this.selectedUserIds.filter(x => x != id)
+                else
+                    this.selectedUserIds = this.selectedUserIds.concat(id)
+
+                this.customEvent({
+                    count : this.selectedUserIds.length,
+                    deselectAll: this.deselectAllUser
+                })
+
+            }
+
+            _isSelected(index) {
+                return this.selectedUserIds.includes(index)
+            }
+
         }
 
         window.customElements.define(ViewIAM.is, ViewIAM);
